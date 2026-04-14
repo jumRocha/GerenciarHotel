@@ -17,7 +17,7 @@ public class GerenciarQuarto {
         // Espaço para o menu futuro
     }
 
-    public void CadastrarTipoQuarto() {
+    public void cadastrarTipoQuarto() {
         System.out.println("===========================");
         System.out.println("Cadastro de Tipos de quarto");
         System.out.println("===========================");
@@ -38,20 +38,19 @@ public class GerenciarQuarto {
         }
     }
 
-  public void CadastrarQuarto() {
+  public void cadastrarQuarto() {
         System.out.println("===========================");
         System.out.println("    Cadastro de Quartos    ");
         System.out.println("===========================");
 
         System.out.println("Quantos quartos deseja adicionar?");
         int numQua = Integer.parseInt(sc.nextLine());
-
+        int tempId = 101; 
         for (int i = 0; i < numQua; i++) {
             System.out.println("======================================");
             System.out.println("\nCadastro do Quarto " + (i + 1));
             System.out.println("======================================");
-            System.out.println("Digite o número do quarto:");
-            int tempNum = Integer.parseInt(sc.nextLine());
+    
 
             TipoQuarto tempCateg = null;
 
@@ -92,15 +91,58 @@ public class GerenciarQuarto {
                     }
                 } else if (op == 2) {
                     // Chama o seu outro método
-                    CadastrarTipoQuarto();
+                    cadastrarTipoQuarto();
                     System.out.println("Categorias atualizadas! Agora selecione a desejada.");
                 } else {
                     System.out.println("Opção inválida!");
                 }
             }
-            Quarto novoQuarto = new Quarto(tempNum, tempCateg);
+            Quarto novoQuarto = new Quarto(tempId++, tempCateg);
             ListaQuartos.add(novoQuarto);
-            System.out.println("Seu novo quarto " + tempNum + "foi cadastrado com sucesso!!!!!");
+            System.out.println("Seu novo quarto " + tempId + "foi cadastrado com sucesso!!!!!");
+        }
+    }
+
+    //listar todos os quartos
+    public void listarQuartos() {
+        System.out.println("===========================");
+        System.out.println("    Lista de Quartos    ");
+        System.out.println("===========================");
+
+        if (ListaQuartos.isEmpty()) {
+            System.out.println("Nenhum quarto cadastrado!");
+        } else {
+            for (Quarto quarto : ListaQuartos) {
+                System.out.println(quarto.toString());
+            }
+        }
+    }
+
+    //listar quartos por categoria
+    public void listarQuartosPorCategoria() {
+        System.out.println("===========================");
+        System.out.println("    Quartos por Categoria    ");
+        System.out.println("===========================");
+
+        if (ListaCategoriaQuarrto.isEmpty()) {
+            System.out.println("Nenhuma categoria cadastrada!");
+            return;
+        }
+
+        for (TipoQuarto categoria : ListaCategoriaQuarrto) {
+            System.out.println("\nCategoria: " + categoria.getCategoriaQuarto());//aqui eu chamo todas as categorias
+            boolean encontrou = false;//e determino como false
+
+            for (Quarto quarto : ListaQuartos) {//esse for vai percorrer a lista de quartos e comparar o id da categoria do quarto com o id da categoria atual do for externo
+                if (quarto.getTipoQuarto().getId() == categoria.getId()) {//se encontrar, ele imprime o quarto e determina encontrou como true
+                    System.out.println(quarto.toString());
+                    encontrou = true;
+                }
+            }
+
+            if (!encontrou) {
+                System.out.println("Nenhum quarto encontrado para esta categoria.");//se, ao final do for interno, encontrou ainda for false, significa que não tem nenhum quarto com aquela categoria, e ele imprime a mensagem
+            }
         }
     }
 }

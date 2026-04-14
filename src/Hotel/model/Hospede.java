@@ -73,7 +73,12 @@ public class Hospede {
         this.valorFinal = valorFinal;
     }
 
+//default
 
+    public Hospede() {
+        this(null,0,null,0,0,0);
+    }
+    
     public void gastoExtra(double valor){
         gastoExtra+=valor;
         gastoFinal(gastoExtra);
