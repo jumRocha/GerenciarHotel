@@ -63,6 +63,15 @@ public class Hospede {
    public void hospedarQuarto(Quarto quarto){
         this.quarto = quarto;
     }
+    //construtor
+    public Hospede(String nomeHospede, int diaOcupacao, Quarto quarto, double gastoExtra, double valorIncial, double valorFinal) {
+         this.quarto = quarto;
+        this.nomeHospede = nomeHospede;
+        this.diaOcupacao = diaOcupacao;
+        this.gastoExtra = gastoExtra;
+        this.valorIncial = valorIncial;
+        this.valorFinal = valorFinal;
+    }
 
 
     public void gastoExtra(double valor){
